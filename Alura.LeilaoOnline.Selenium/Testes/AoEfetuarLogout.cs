@@ -15,6 +15,7 @@ namespace Alura.LeilaoOnline.Selenium.Testes
             driver = fixture.Driver;
         }
 
+        [Fact]
         public void LoginValidoHome()
         {
             var loginPO = new LoginPO(driver);
@@ -22,6 +23,9 @@ namespace Alura.LeilaoOnline.Selenium.Testes
             loginPO.PreencheFormulario("fulano@example.org", "123");
             loginPO.SubmeteFormulario();
 
+            var dashboardPO = new DashboardInteressadaPO(driver);
+
+            dashboardPO.EfetuarLogout();
 
             Assert.Contains("Próximos Leilões", driver.PageSource);
         }
