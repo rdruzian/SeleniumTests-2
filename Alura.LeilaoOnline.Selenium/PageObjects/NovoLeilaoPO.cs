@@ -23,7 +23,7 @@ namespace Alura.LeilaoOnline.Selenium.PageObjects
             this.driver = driver;
             byInputTitulo = By.Id("Titulo");
             byInputDescricao = By.Id("Descricao");
-            byInputCategoria = By.Id("Categoria");
+            byInputCategoria = By.ClassName("select-wrapper");
             byInputValorInicial = By.Id("ValorInicial");
             byInputImagem = By.Id("ArquivoImagem");
             byInputInicioPregao = By.Id("InicioPregao");
