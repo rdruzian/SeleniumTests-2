@@ -1,5 +1,8 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alura.LeilaoOnline.Selenium.PageObjects
 {
@@ -13,17 +16,29 @@ namespace Alura.LeilaoOnline.Selenium.PageObjects
         private By byInputImagem;
         private By byInputInicioPregao;
         private By byInputTerminoPregao;
+        private By byBotaoSubmit;
 
         public NovoLeilaoPO(IWebDriver driver)
         {
             this.driver = driver;
             byInputTitulo = By.Id("Titulo");
-            byInputDescricao = By.Id("Descriao");
+            byInputDescricao = By.Id("Descricao");
             byInputCategoria = By.Id("Categoria");
             byInputValorInicial = By.Id("ValorInicial");
-            byInputImagem = By.Id("Imagem");
+            byInputImagem = By.Id("ArquivoImagem");
             byInputInicioPregao = By.Id("InicioPregao");
             byInputTerminoPregao = By.Id("TerminoPregao");
+            byBotaoSubmit = By.CssSelector("button[type=submit]");
+        }
+
+        public IEnumerable<string> Categorias
+        {
+            get
+            {
+                var elementoCategoria = new SelectElement(driver.FindElement(byInputCategoria));
+
+                return elementoCategoria.Options.Where(o => o.Enabled).Select(o => o.Text);
+            }
         }
 
         public void Visitar()
@@ -38,8 +53,13 @@ namespace Alura.LeilaoOnline.Selenium.PageObjects
             driver.FindElement(byInputCategoria).SendKeys(categoria);
             driver.FindElement(byInputValorInicial).SendKeys(valor.ToString());
             driver.FindElement(byInputImagem).SendKeys(imagem);
-            driver.FindElement(byInputInicioPregao).SendKeys(inicio.ToString());
-            driver.FindElement(byInputTerminoPregao).SendKeys(termino.ToString());
+            driver.FindElement(byInputInicioPregao).SendKeys(inicio.ToString("dd/MM/yyyy"));
+            driver.FindElement(byInputTerminoPregao).SendKeys(termino.ToString("dd/MM/yyyy"));
+        }
+
+        public void SubmeteForm()
+        {
+            driver.FindElement(byBotaoSubmit).Click();
         }
     }
 }
