@@ -3,7 +3,6 @@ using OpenQA.Selenium;
 using Xunit;
 using Alura.LeilaoOnline.Selenium.Fixtures;
 using Alura.LeilaoOnline.Selenium.PageObjects;
-using System.Threading;
 
 namespace Alura.LeilaoOnline.Selenium.Testes
 {
