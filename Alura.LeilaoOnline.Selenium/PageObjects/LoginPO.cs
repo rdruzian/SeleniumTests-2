@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using System.Net.Mail;
 
 namespace Alura.LeilaoOnline.Selenium.PageObjects
 {
@@ -31,6 +32,13 @@ namespace Alura.LeilaoOnline.Selenium.PageObjects
         public void SubmeteFormulario()
         {
             driver.FindElement(byBotaoLogin).Submit();
+        }
+
+        public void EfetuarLogin(string login, string senha)
+        {
+            Visitar();
+            PreencheFormulario(login, senha);
+            SubmeteFormulario();
         }
 
     }

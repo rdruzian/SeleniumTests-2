@@ -21,13 +21,9 @@ namespace Alura.LeilaoOnline.Selenium.Testes
         public void DadoLoginInteressadMostrarPainelResult()
         {
             var loginPO = new LoginPO(driver);
-
-            loginPO.Visitar();
-            loginPO.PreencheFormulario("fulano@example.org", "123");
-            loginPO.SubmeteFormulario();
+            loginPO.EfetuarLogin("fulano@example.org", "123");
 
             var dashboardInteressadaPO = new DashboardInteressadaPO(driver);
-
             dashboardInteressadaPO.Filtro.PesquisarLeiloes(new List<string> { "Arte", "Coleções" }, "", true);
 
             Assert.Contains("Resultado da pesquisa", driver.PageSource);
